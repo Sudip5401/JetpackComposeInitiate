@@ -38,7 +38,7 @@ class MarginView : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.primary) {
                     Column {
                         CustomTextView()
-                        CustomAnnotatedTextView()
+                        CustomAnnotatedTextView(MaterialTheme.colors.secondary)
                         RepeatText()
                         SuperSubScriptText("Hello", "World")
                     }
@@ -68,7 +68,7 @@ fun CustomTextView() {
 }
 
 @Composable
-fun CustomAnnotatedTextView() {
+fun CustomAnnotatedTextView(color : Color) {
     Text(
         buildAnnotatedString {
             withStyle(
@@ -79,7 +79,7 @@ fun CustomAnnotatedTextView() {
             ) {
                 withStyle(
                     style = SpanStyle(
-                        color = MaterialTheme.colors.secondary,
+                        color = color,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -157,7 +157,7 @@ fun MarginViewPreview() {
         Surface(color = MaterialTheme.colors.primary) {
             Column {
                 CustomTextView()
-                CustomAnnotatedTextView()
+                CustomAnnotatedTextView(MaterialTheme.colors.secondary)
                 RepeatText()
                 SuperSubScriptText("Hello", "World")
             }
