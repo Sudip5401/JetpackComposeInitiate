@@ -12,10 +12,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.modifier.modifierLocalOf
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeinitial.ui.theme.JetpackComposeInitialTheme
@@ -29,6 +33,7 @@ class EditTextFieldView : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         NormalEdittextFieldUI()
+                        PasswordEdittextFieldUI()
                     }
                 }
             }
@@ -43,6 +48,7 @@ fun EditTextFieldPreview() {
         Surface(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 NormalEdittextFieldUI()
+                PasswordEdittextFieldUI()
             }
         }
     }
@@ -88,5 +94,49 @@ private fun NormalEdittextFieldUI() {
         keyboardActions = KeyboardActions(onDone = {
             println("clicked keyboard onDone")
         })
+    )
+}
+
+
+@Composable
+private fun PasswordEdittextFieldUI() {
+    var password by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var passwordVisibiltySelection by remember {
+        mutableStateOf(false)
+    }
+    val visibleIcon =
+        if (passwordVisibiltySelection) painterResource(id = R.drawable.ic_google_logo) else painterResource(
+            id = R.drawable.ic_launcher_background
+        )
+    /*TextField*/
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        value = password,
+        onValueChange = { newValue -> password = newValue },
+        label = { Text(text = "Password") }, singleLine = true,
+        placeholder = { Text(text = "Enter Password") },
+        trailingIcon = {
+            IconButton(onClick = {
+                passwordVisibiltySelection = !passwordVisibiltySelection
+            }) {
+                Icon(
+                    painter = visibleIcon,
+                    contentDescription = "visibleIcon",
+                    modifier = Modifier
+                        .width(15.dp)
+                        .height(15.dp)
+                )
+            }
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+            imeAction = ImeAction.Done
+        ),
+        visualTransformation = if (passwordVisibiltySelection) VisualTransformation.None else PasswordVisualTransformation()
     )
 }
