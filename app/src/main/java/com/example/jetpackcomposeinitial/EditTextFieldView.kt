@@ -34,6 +34,7 @@ class EditTextFieldView : ComponentActivity() {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         NormalEdittextFieldUI()
                         PasswordEdittextFieldUI()
+                        InputFieldWithCharacterLimit()
                     }
                 }
             }
@@ -49,9 +50,34 @@ fun EditTextFieldPreview() {
             Column(modifier = Modifier.fillMaxWidth()) {
                 NormalEdittextFieldUI()
                 PasswordEdittextFieldUI()
+                InputFieldWithCharacterLimit()
             }
         }
     }
+}
+
+@Composable
+private fun InputFieldWithCharacterLimit() {
+    var fieldValue by remember {
+        mutableStateOf("")
+    }
+    val maxChar = 10
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        value = fieldValue,
+        onValueChange = { newValue ->
+            if (newValue.length <= maxChar)
+                fieldValue = newValue
+        },
+        label = { Text(text = "Title") }, singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Text,
+            autoCorrect = false,
+            imeAction = ImeAction.Done
+        ),
+    )
 }
 
 @Composable
