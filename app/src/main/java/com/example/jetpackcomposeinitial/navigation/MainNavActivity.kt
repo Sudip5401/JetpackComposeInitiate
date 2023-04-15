@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.jetpackcomposeinitial.nestednavigation.SetupNavGraph
 import com.example.jetpackcomposeinitial.ui.theme.JetpackComposeInitialTheme
 
 class MainNavActivity : ComponentActivity() {
@@ -22,7 +23,11 @@ class MainNavActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
                 ) {
                     navController = rememberNavController()
+                    /*This is for normal navigation graph*/
                     SetUpNavGraph(navController)
+
+                    /*This is for nested navigation graph*/
+                    SetupNavGraph(navController)
                 }
             }
         }
