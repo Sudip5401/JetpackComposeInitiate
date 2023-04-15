@@ -26,7 +26,13 @@ fun HomeScreen(navController: NavHostController) {
                 fontSize = MaterialTheme.typography.h4.fontSize
             ),
             modifier = Modifier.clickable {
-                navController.navigate(Screen.Details.route)
+//                navController.navigate(Screen.Details.passIntAndStringValue(10, "Nawin"))
+                navController.navigate(
+                    Screen.Details.PassMultiOptionalParams(
+                        name = "Nawin",
+                        id = 25
+                    )
+                )
             })
     }
 }
