@@ -51,6 +51,7 @@ fun HomeScreen(navController: NavHostController) {
                         name = "John"
                     )
                 )
+//                throw RuntimeException("Test Crash"); // Force a crash
             },
             text = "Home",
             color = MaterialTheme.colors.primary,

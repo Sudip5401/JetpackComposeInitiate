@@ -26,6 +26,7 @@ fun SignUpScreen(
         Text(
             modifier = Modifier.clickable {
                 navController.popBackStack()
+//                throw RuntimeException("Test Crash"); // Force a crash
             },
             text = "Sign Up",
             color = Color.Green,
