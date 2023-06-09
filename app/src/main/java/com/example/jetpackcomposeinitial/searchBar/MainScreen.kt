@@ -24,6 +24,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MainScreen(mainViewModel: MainViewModel) {
 
+    /* As using 'by' keyword to provide the observer here itself (acting as a LiveData Observer) assigned into respective
+    * properties, once there is any updation into their value, where ever this are being used
+    * will reload with the updated value*/
     val searchWidgetState by mainViewModel.searchWidgetState
     val searchTextState by mainViewModel.searchTextState
 
